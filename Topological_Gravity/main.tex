@@ -1,0 +1,145 @@
+\documentclass[10pt,reqno,draft]{article}
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm,version}
+\usepackage{mathrsfs,fancybox,pifont}
+\usepackage{graphicx}
+\usepackage{url,hyperref}
+\usepackage[notcite,notref]{showkeys}
+\usepackage{color}
+\usepackage{subfigure,multirow}
+\usepackage{epstopdf}
+\usepackage{cases}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathtools}
+\usepackage{algorithm,algorithmic}
+\usepackage{authblk}
+%\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{tikz-cd}
+%\usepackage{MnSymbol}
+\usepackage{braket}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgscale{0.38}
+    \import{./Figures/}{#1.pdf_tex}
+}
+
+\allowdisplaybreaks
+
+\setlength{\textwidth}{15cm}
+\setlength{\textheight}{21.6cm}
+\setlength{\oddsidemargin}{.5cm}
+\setlength{\evensidemargin}{.5cm}
+\baselineskip 13pt
+
+%\renewcommand{\baselinestretch}{1.1}
+\renewcommand {\thefootnote}{\fnsymbol{footnote}}
+
+%Notation
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+% number of equation, figure and table
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% command for equations, theorems and lemmas etc.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[theorem]
+
+\title{Topological Gravity}
+\author[1]{Xuhui Zhang\thanks{zhangxh.math@gmail.com}}
+%\author[1]{JIAN ZHOU\thanks{jianzhou@mail.tsinghua.edu.cn}}
+%\author[2]{Author C\thanks{C.C@university.edu}}
+%\author[2]{Author D\thanks{D.D@university.edu}}
+\affil[1]{Department of Mathematical Science, Tsinghua University}
+%\affil[2]{Department of Mechanical Engineering, \LaTeX\ University}
+
+% Corresponding author. {\it Email address:} xyz@math.univ.edu.
+
+%\author{D. Doe, P. T. Frank, and J. E. Smith\thanks{ {\it Email address:} xyz@math.univ.edu.}\
+%\small Department of Mathematics, XXX University,\
+%\small City 123456, China}
+
+\date{\today}
+
+\begin{document}
+    \maketitle
+    A note of \cite{dijkgraafDevelopmentsTopologicalGravity2018}.
+    \section{Introduction}
+    There are two approaches to study 2D quantum gravity. One is through matrix model, which is developed in 1980's, see \cite{francesco2DGravityRandom1995} for a comprehensive review. The other one is through topological gravity, whose corelators are given by the intersection numbers on the moduli space of Riemann Surfaces. Witten conjectured that these two approaches are equivalent\cite{wittenStructureTopologicalPhase1990,wittenTwodimensionalGravityIntersection1990}, and his conjecture is proved by Kontsevich\cite{kontsevichIntersectionTheoryModuli1992}. Mirzakhani also gave a new proof of Witten conjecture by using her recursion relations for Weil-Petersson volume \(V_{g,\boldsymbol{b}}\) of moduli space of hyperbolic metrics on Riemann surface of genus \(g\) with \(n\) boundaries, where boundaries are geodesics of length \(\boldsymbol{b}=(b_1,\dots ,b_{n})\).
+    \section{Matrix Model}
+    
+
+
+
+
+    \addcontentsline{toc}{section}{References}
+    \bibliographystyle{alpha}
+    \bibliography{ref}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ------------ Draft Before--------
+\section{Weil-Petersson Volumes and 2D Topological Gravity}
+
+Let \(\overline{\mathcal{M}}_{g,n }\) be the moduli space of stable curves of genus \(g\) with \(n\) marked points \(p_1,\dots ,p_{n}\) and \(\mathcal{L}_{i}\) be the \(i\)-th line bundle corresponding to the \(i\)-th marked point \(p_{i}\). Denote 
+\begin{equation}
+  \psi_{i}=c_{1}(\mathcal{L}_i),
+\end{equation}
+then the correlation functions of 2D topological gravity is given by the intersection number 
+\begin{equation}\label{eq:cor-TG}
+  \braket{\tau_{d_1}\cdots\tau_{d_n} }_{g,n }=\int_{\overline{\mathcal{M}}_{g,n}}\psi_{1}^{d_1}\cdots \psi_{n}^{d_n}, 
+\end{equation}
+where \(d_1,\dots ,d_n\in \mathbb{N}\).  The right hands side of \eqref{eq:cor-TG} vanishes unless 
+\begin{equation}
+  \sum_{j=1}^{n}d_{j}=3g-3+n,
+\end{equation}
+for dimensional reason.
+
+To introduce the connection between topological gravity and Weil-Petersson volume of \(\mathcal{M}_{g}\), we need the kappa classes (or Miller-Morita-Mumford classes). Let \(\pi:\overline{\mathcal{M}}_{g,1}\to \overline{\mathcal{M}}_{g}\) be the forgetful map. The kappa classes are defined by 
+\begin{equation}
+  \kappa_{d}=\pi_{*}(\tau_{d+1}).
+\end{equation}
+\(\kappa:=\kappa_{1}\) is related to the Weil-Petersson symplectic form \(\omega\) of \(\mathcal{M}_{g}\) by
+\begin{equation}
+  \frac{\omega}{2\pi^{2}}=\kappa.
+\end{equation}
+Then the volume of \(\mathcal{M}_{g}\) is given by 
+\begin{equation}
+  V_{g}=\int_{\overline{\mathcal{M}}_{g}} \frac{\kappa^{3g-3}}{(3g-3)!}=\int_{\overline{\mathcal{M}}_{g}}\exp (\kappa).
+\end{equation}
+
+The moduli space \(\mathcal{M}_{g,n}\) also has a Weil-Peterson volume \(V_{g,n}\). \(V_{g,n}\) can be computed by using the knowledge of intersection theory on \(\overline{\mathcal{M}}_{g,n}\), but it is difficult to get explicit general formulas.
+
+Mirzakhani used a different method to compute \(V_{g,n}\) in \cite{mirzakhaniSimpleGeodesicsWeilPetersson2006}. According to the uniformization theorem, stable curves admit a metric of constant scalar curvature \(R=-1\). She considered Riemann surfaces with boundaries which carry such hyperbolic metrics. Assume that the boundaries are geodesics if lengths \(b_1,\dots ,b_n\). We denote the moduli space of such hyperbolic metrics as \(\mathcal{M}_{g;\boldsymbol{b}}\) where \(\boldsymbol{b}=(b_1,\dots ,b_{n})\). Let \(b_1,\dots ,b_n\) tend to 0, then \(\mathcal{M}_{g,\boldsymbol{b}}\) tends to \(\mathcal{M}_{g,n}\). Hence \(\mathcal{M}_{g,\boldsymbol{b}}\) has the same topological type as \(\mathcal{M}_{g,n}\) for any \(\boldsymbol{b}\). 

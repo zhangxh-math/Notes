@@ -1,0 +1,48 @@
+\begin{thebibliography}{EGNO15}
+
+\bibitem[Ati88]{atiyahTopologicalQuantumField1988}
+Michael~F. Atiyah.
+\newblock Topological quantum field theory.
+\newblock {\em Publications Math{\'e}matiques de l'IH{\'E}S}, 68:175--186, 1988.
+
+\bibitem[CM16]{carquevilleAdjunctionsDefectsLandau2016}
+Nils Carqueville and Daniel Murfet.
+\newblock Adjunctions and defects in {{Landau}}--{{Ginzburg}} models.
+\newblock {\em Advances in Mathematics}, 289:480--566, February 2016.
+
+\bibitem[CR18]{carquevilleIntroductoryLecturesTopological2018}
+Nils Carqueville and Ingo Runkel.
+\newblock Introductory lectures on topological quantum field theory.
+\newblock {\em Banach Center Publications}, 114:9--47, 2018.
+
+\bibitem[EGNO15]{etingofTensorCategories2015}
+Pavel Etingof, Shlomo Gelaki, Dmitri Nikshych, and Victor Ostrik.
+\newblock {\em Tensor Categories}.
+\newblock Number volume 205 in Mathematical Surveys and Monographs. American Mathematical Society, Providence, Rhode Island, 2015.
+
+\bibitem[HL05]{herbstLocalizationTracesOpenclosed2005}
+Manfred Herbst and Calin-Iuliu Lazaroiu.
+\newblock Localization and traces in open-closed topological {{Landau-Ginzburg}} models.
+\newblock {\em Journal of High Energy Physics}, 2005(05):044--044, May 2005.
+
+\bibitem[Koc04]{kockFrobeniusAlgebras2d2004}
+Joachim Kock.
+\newblock {\em Frobenius Algebras and 2-d Topological Quantum Field Theories}.
+\newblock Number~59. Cambridge University Press, 2004.
+
+\bibitem[Seg88]{segalDefinitionConformalField1988}
+G.~B. Segal.
+\newblock The {{Definition}} of {{Conformal Field Theory}}.
+\newblock In K.~Bleuler and M.~Werner, editors, {\em Differential {{Geometrical Methods}} in {{Theoretical Physics}}}, pages 165--171. Springer Netherlands, Dordrecht, 1988.
+
+\bibitem[Vaf91]{vafaTOPOLOGICALLANDAUGINZBURGMODELS1991}
+Cumrun Vafa.
+\newblock {{TOPOLOGICAL LANDAU-GINZBURG MODELS}}.
+\newblock {\em Modern Physics Letters A}, 06(04):337--346, February 1991.
+
+\bibitem[Wit89]{wittenQuantumFieldTheory1989}
+Edward Witten.
+\newblock Quantum field theory and the {{Jones}} polynomial.
+\newblock {\em Communications in Mathematical Physics}, 121(3):351--399, September 1989.
+
+\end{thebibliography}

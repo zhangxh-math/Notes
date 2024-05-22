@@ -1,0 +1,551 @@
+% !Tex program = xelatex
+
+\documentclass[10pt,reqno,final]{article}
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm,version}
+\usepackage{mathrsfs,fancybox,pifont}
+\usepackage{graphicx}
+\usepackage{url,hyperref}
+\usepackage[notcite,notref]{showkeys}
+\usepackage{color}
+\usepackage{subfigure,multirow}
+\usepackage{epstopdf}
+\usepackage{cases}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathtools}
+\usepackage{algorithm,algorithmic}
+\usepackage{authblk}
+%\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{tikz-cd}
+%\usepackage{MnSymbol}
+\usepackage{braket}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgscale{0.38}
+    \import{./Figures/}{#1.pdf_tex}
+}
+
+\allowdisplaybreaks
+
+\setlength{\textwidth}{15cm}
+\setlength{\textheight}{21.6cm}
+\setlength{\oddsidemargin}{.5cm}
+\setlength{\evensidemargin}{.5cm}
+\baselineskip 13pt
+
+%\renewcommand{\baselinestretch}{1.1}
+\renewcommand {\thefootnote}{\fnsymbol{footnote}}
+
+%Notation
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+% number of equation, figure and table
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% command for equations, theorems and lemmas etc.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[theorem]
+
+
+\title{Topological Quantum Field Theory}
+\author[1]{Xuhui Zhang\thanks{zhangxh.math@gmail.com}}
+%\author[1]{JIAN ZHOU\thanks{jianzhou@mail.tsinghua.edu.cn}}
+%\author[2]{Author C\thanks{C.C@university.edu}}
+%\author[2]{Author D\thanks{D.D@university.edu}}
+\affil[1]{Department of Mathematical Science, Tsinghua University}
+%\affil[2]{Department of Mechanical Engineering, \LaTeX\ University}
+
+% Corresponding author. {\it Email address:} xyz@math.univ.edu.
+
+%\author{D. Doe, P. T. Frank, and J. E. Smith\thanks{ {\it Email address:} xyz@math.univ.edu.}\
+%\small Department of Mathematics, XXX University,\
+%\small City 123456, China}
+
+\date{\today}
+
+\begin{document}
+    \maketitle
+    This note is based on \cite{carquevilleIntroductoryLecturesTopological2018}. 
+    \section{Motivation and definition of TQFT}
+    \subsection{Motivation: path integrals}\label{SSS:path-integral}
+    A path integral is an integral on infinite dimensional space
+    \begin{equation}\label{eq:path-integral}
+        \mathcal{Z}=\int D\Phi\, e^{-S[\Phi]},
+    \end{equation}
+    The notations in \eqref{eq:path-integral} are as follows.
+    \begin{itemize}
+        \item A \emph{field} \(\Phi:M\to X\) is a smooth map between two Riemannian manifold \(M\) and \(X\). 
+        \item The \emph{action functional} \(S[\Phi]\) depends on fields \(\Phi\) and its first derivatives \[
+            S[\Phi]=\int_{M}\mathcal{L}(\Phi,\Phi_{\mu})(x)\sqrt{\det g }\,\mathrm{d}^{n }x ,
+        \]
+        where \(g \) is the metric on \(M \) and \(n=\dim M \).
+        \item The integral \(\int D\Phi\) means to integral over all fields \(\Phi \), which makes no sense in mathematics. 
+    \end{itemize}
+
+    Let \(\mathcal{O}_{1},\ldots,\mathcal{O}_{n } \) be some observables, i.e. functionals from the set of configurations \(\{ \Phi:M \to X  \}\) to \(\mathbb{C}\). The \emph{correlation} function of \(\mathcal{O}_{1},\ldots,\mathcal{O}_{n } \) is 
+    \[
+        \braket{\mathcal{O}_{1},\ldots,\mathcal{O}_{n} }_{g}= \frac{1}{\mathcal{Z}}\int D\Phi\, \mathcal{O}_{1}\cdots  \mathcal{O}_{n} e^{-S[\Phi]},
+    \]
+    where \(g\) is the metric on \(M\). If the correlation functions is independent of \(g\), we get a topological field theory.
+
+    \begin{example}[Chern-Simons theory]
+      Let \(M\) be a compact 3-dimensional oriented Riemannian manifold and \(G\) be a compact Lie group . \(\mathfrak{g}\) is the Lie algebra of \(G\). Assume that \(A\in \Omega^{1}(M,\mathfrak{g})\) is a connection 1-form on a principle \(G\)-bundle \(P\to M \). Then the action functional is given by 
+      \begin{equation}\label{eq:S-Chern-Simons}
+        S[A]=\gamma\int_{M }\operatorname{tr}\left( A\wedge \mathrm{d}A+ \frac{2}{3}A\wedge A\wedge A \right) ,
+      \end{equation}
+      where \(\gamma\) is a constant and \(\operatorname{tr}\) is the matrix trace. The \eqref{eq:S-Chern-Simons} is independent of metrics, hence Chern-Simons theory is a topological theory. For details, see \cite{wittenQuantumFieldTheory1989}. 
+    \end{example}
+
+    Let us illustrate the essential properties of path integral in TQFT of dimension \(n\) that we want:
+    \begin{enumerate}[(1)]
+      \item For each \((n-1)\)-manifold \(E\), there is a state space \(\mathcal{H}_{E}\) which consists all functionals on the classical fields on \(E\). We emphasize that state spaces are all Hilbert spaces.
+      \item For each oriented \(n\)-manifold \(M\) with boundary \(E\), we assign \(M\) a functional \(\mathcal{Z}(M)\in \mathcal{H}_{E}\) on the space of classical fields, \[
+        \mathcal{Z}(M)(\varphi)=\int_{\{ \Phi|\Phi_{E}=\varphi \}}D\Phi\,e^{-S[\Phi]}.
+      \]
+      \item For a \((n-1)\)-manifold \(E=E_1\sqcup E_2  \), we expect \(\mathcal{H}_{E}=\mathcal{H}_{E_1}\otimes \mathcal{H}_{E_2}\) since the linear space \(\mathcal{F}(E)\) of functionals from the space \(\mathcal{M}(E)\) of classical field to \(\mathbb{C}\) would satisfy \(\mathcal{F}(E)=\mathcal{F}(E_1)\otimes \mathcal{F}(E_2)\) when \(\mathcal{M}(E_1)\) and \(\mathcal{M}(E_2)\) are both finite sets.
+      \item \label{enum:duality} For cylinder \(M=E\times [0,1]\), the path integral produces an element \(\mathcal{Z}(M)\in \mathcal{H}_{E }\otimes \mathcal{H}_{\bar{E}}\) where \(\bar{E}\) is \(E\) with reversed orientation. Let \(h\) and \(\bar{h}\) be the metric on \(\mathcal{H}_{E}\) and \(\mathcal{H}_{\bar{E}}\) respectively and denote that \[
+        \mathcal{Z}(M )=\sum_{i}e_{i}\otimes f^{i}
+      \]
+      where \(e_{i}\in \mathcal{H}_{E }\) and \(f^{i}\in \mathcal{H}_{\bar{E}}\), then \(\mathcal{Z}(M )\) define an anti-linear map from \(\mathcal{H}_{\bar{E}}\) to \(\mathcal{H}_{E }\) by 
+      \begin{equation}\label{eq:Z(M)}
+        v\mapsto \sum_{i} \bar{h}(f^{i},v )e_{i}. 
+      \end{equation}
+      We want this map to be injective since we can distinguish two states in \(\mathcal{H}_{E }\) by testing state in \(\mathcal{H}_{\bar{E}}\) if \eqref{eq:Z(M)} is injective.
+      \item \label{enum:intermediate} Given an \(n\)-dimensional manifold \(M\) with non-empty boundary \(E=\partial M \) and an \((n-1)\)-dimensional submanifold \(U\in M \), we cut \(M\) along \(U\) and obtain a new manifold \(N\), then \(\partial N=E\sqcup U\sqcup \bar{U}\). Suppose that \(\{ u_{i} \}\) is a orthonormal basis of \(\mathcal{H}_{U}\) and \(\bar{u}^{i}\) is the preimage of \(u_{i}\) when \eqref{eq:Z(M)} is surjective, then we want 
+      \begin{equation}
+        \mathcal{Z}(M)=\sum_{i}h(u_{i},u'_{i})\bar{h}(\bar{u}_{i},\bar{u}_{i}')v_{i}\in \mathcal{H}_{E},
+      \end{equation}
+      where
+      \[
+        \mathcal{Z}(N)=\sum_{i}u_{i}'\otimes \bar{u}_{i}'\otimes v_{i}\in \mathcal{H}_{U}\otimes \mathcal{H}_{\bar{U}}\otimes \mathcal{H}_{E}
+      \]
+      for the reason that
+      \[
+        \mathcal{Z}(M)=\int_{\psi}D\psi\int_{\{ \Phi|\Phi|_{E}=\varphi,\Phi|_{U}=\psi \}}D\Phi\,e^{-S[\Phi]}.
+      \]
+    \end{enumerate}
+
+    \subsection{TQFTs as functors}
+    For general QFTs, we need a functor from geometry to algebra to describe it. It's really difficult. For TQFT, the functor we need is given by Atiya and Segal\cite{atiyahTopologicalQuantumField1988,segalDefinitionConformalField1988}.
+    \begin{definition}\label{def:AS-TQFT}
+      An \(n\)-dimensional oriented closed TQFT is a symmetric monoidal functor 
+      \begin{equation}
+        \mathcal{Z}:\mathrm{Bord}_{n}\to \mathrm{Vect}_{\mathbb{K}}.
+      \end{equation}
+    \end{definition}
+    
+    At first, I will explain what is a symmetric monoidal structure. And then, I will compare Definition \ref{def:AS-TQFT} with the definition using path integrals. 
+
+    Roughly speaking, the words 'symmetry' and 'monoidal' mean that there is a multiplication operation between the objects in the given category \(\mathcal{C}\). For \(A,B,C\in \mathrm{Obj}(\mathcal{C})\), the multiplication \(\otimes_{\mathcal{C}} :\mathrm{Obj}(\mathcal{C})\times \mathrm{Obj}(\mathcal{C})\to \mathrm{Obj}(\mathcal{C})\) satisfies the following conditions:
+    \begin{itemize}
+        \item Symmetry: \(A\otimes_{\mathcal{C}} B\cong B\otimes_{\mathcal{C}} A\),
+        \item Associativity: \((A\otimes_{\mathcal{C}} B)\otimes_{\mathcal{C}} C\cong A\otimes_{\mathcal{C}} (B\otimes_{\mathcal{C}} C)\),
+        \item unit: there is \(1\in \mathrm{Obj}(\mathcal{C})\) such that \(1\otimes_{\mathcal{C}} A\cong A\otimes_{\mathcal{C}} 1\cong A\).
+    \end{itemize}
+    For details and explicit definition see \cite{etingofTensorCategories2015}. 
+
+    In \(\mathrm{Vect}_{\mathbb{K}}\), the objects are \(\mathbb{K}\) vector spaces and the morphisms are \(\mathbb{K}\)-linear map. The multiplication in the monoidal structure is given by the tensor product with identity \(\mathbb{K}\). 
+
+    In \(\mathrm{Bord}_{n}\), the objects are oriented closed \((n-1)\)-dimensional real manifolds \(E \) for \(n\in \mathbb{N}_{+}\). To understand the morphisms in \(\mathrm{Bord}_{n}\), we should talk about bordisms first.
+    \begin{definition}\label{def:bordism}
+      Let \(E,F\in \mathrm{Obj}(\mathrm{Bord}_{n})\). Then a \emph{bordism} \(E\to F \) is an oriented compact \(n\)-dimensional manifold \(M\) with smooth maps \(\iota_{\text{in }}:E\to M\) and \(\iota_{\text{out}}:F\to M\) such that 
+      \begin{equation}\label{eq:bordism}
+        \bar{\iota}_{\text{in}}\sqcup \iota_{\text{out}}:\bar{E}\sqcup F\to \partial M
+      \end{equation}
+      is an orientation-preserving diffeomorphism where \(\bar{E}\) is \(E\) with reverse orientation. 
+    \end{definition}
+    \begin{remark}
+      An oriented compact \(n\)-dimensional manifold represents more than one morphism without specifying the source and the target, for example, the oriented compact manifold \(M\) given in Definition \ref{def:bordism} is a bordism from \(E\) to \(F\), but it can also be regarded as a bordism from \(E\sqcup \bar{F}\) to \(\emptyset\). So we should specify the source and the target when we mention a morphism in \(\mathrm{Bord}_{n}\).
+    \end{remark}
+    Define the equivalent relation between bordisms \((M,\iota_{\text{in}},\iota_{\text{out}}),(M',\iota_{\text{in}}',\iota_{\text{out}}'):E\to F\) by that if there is an orientation-preserving diffeomorphism \(\psi:M\to M'\) such that 
+    \begin{equation}
+        \begin{tikzcd}
+            && M \\
+            \\
+            E &&&& {F} \\
+            \\
+            && {M'}
+            \arrow["\psi", from=1-3, to=5-3]
+            \arrow["{\iota_{\text{in}}}", from=3-1, to=1-3]
+            \arrow["{\iota_{\text{in}}'}"', from=3-1, to=5-3]
+            \arrow["{\iota_{\text{out}}}", from=3-5, to=1-3]
+            \arrow["{\iota_{\text{out}}'}", from=3-5, to=5-3]
+        \end{tikzcd}
+    \end{equation}
+    commutes.
+    Morphisms in \(\mathrm{Obj}(M)\) are equivalent classes of bordisms. And composition of morphisms \(M_1:E\to F \) and \(M_2:F\to G\) in \(\mathrm{Bord}_{n}\) is given by gluing \(M_1\) and \(M_2\) along \(F\). The multiplication in the monoidal stucture is the disjoint product \(\sqcup\) and the unit is \(\emptyset\). For details, see \cite{kockFrobeniusAlgebras2d2004}. 
+
+    We can see that there are lots of difference between the motivation illustrated in \S\ref{SSS:path-integral} and the Definition \ref{def:AS-TQFT}. For example, we do not need \(\mathcal{Z}(M)\) to be a Hilbert space in Definition \ref{def:AS-TQFT}. But the condition \ref{enum:duality} and \ref{enum:intermediate} can also be satisfied in another sense without metrics. Actually, for \(E\in \mathrm{Obj}(\mathrm{Bord}_{n})\) and \(v\in \mathcal{H}_{E}\) and \(\bar{v}\in \mathcal{H}_{\bar{E}}\), we can define a pairing 
+    \begin{equation}
+      d_{E }:\mathcal{H}_{E }\otimes \mathcal{H}_{\bar{E}}\to \mathbb{K}
+    \end{equation}
+    by acting the functor \(\mathcal{Z}\) on the morphism 
+    \[
+        E\times [0,1]:E\sqcup \bar{E}\to \emptyset,
+    \]
+    and using the isomorphism \(\mathcal{Z}(E)\otimes \mathcal{Z}(\bar{E} )\cong \mathcal{Z}(E\sqcup \bar{E})\). For a condition similar to \ref{enum:duality} in \S \ref{SSS:path-integral}, we can regard \(\mathcal{Z}(M)\in \mathcal{Z}(\bar{E})\otimes \mathcal{Z}(F)\) as a linear map from \(\mathcal{Z}(E)\) to \(\mathcal{Z}(F)\) by 
+    \begin{equation}
+      \mathcal{Z}(E)\xrightarrow{\otimes \mathcal{Z}(M)}\mathcal{Z}(E )\otimes \mathcal{Z}(M)\xrightarrow{d_{E}\otimes \mathrm{id}_{\mathcal{Z}(F)}}\mathcal{Z}(F).
+    \end{equation}
+    If we cut an \(n\)-manifold \(M\) with boundary \(E\) along an \((n-1)\)-submanifold \(U \subseteq M \) and obtain a new manifold \(N\), we can demand that 
+    \begin{equation}
+      \mathcal{Z}(M)=d_{U}\otimes \mathrm{id}_{E}(\mathcal{Z}(N)),
+    \end{equation}
+    as in \ref{enum:intermediate} in \S \ref{SSS:path-integral}. 
+
+    Now, we present the most crucial property of TQFT.
+
+    \begin{proposition}
+      Let \(\mathcal{Z}:\mathrm{Bord}_{n}\to \mathrm{Vect}_{\mathbb{K}}\) be a TQFT and \(E\in \mathrm{Obj}(\mathrm{Bord}_{n})\). Then 
+      \begin{enumerate}[(1)]
+          \item \(\mathcal{Z}(E\times [0,1]:E\to E)=\mathrm{id}_{\mathcal{Z}(E)}\),
+          \item \(\dim \mathcal{Z}(E)<\infty\) and \(\mathcal{Z}(\bar{E})\cong \mathcal{Z}(E )^{*}\).
+      \end{enumerate}
+    \end{proposition}
+    \begin{proof}
+      Denote the morphism \(b:= E\times [0,1]:E\to E\) in \(\mathrm{Bord}_{n}\), then for any morphism \(b'\in \mathrm{Hom}_{\mathrm{Bord}_{n}}(E,F)\) and \(b''\in \mathrm{Hom}_{\mathrm{Bord}_{n}}(F,E)\),  we have 
+      \[
+        b\circ b''=b'', \quad b'\circ b=b',
+      \]
+      since gluing with a cylinder does not change the smooth structure. Hence \(b=\mathrm{id}_{E}\).
+
+      Consider the following morphisms in \(\mathrm{Bord}_{n}\)
+    \begin{figure}[H]
+      \centering
+      \incfig{Mor1Bordn}
+      \caption{2 morphisms in \(\mathrm{Bord}_{n}\)}
+      \label{fig:Mor1Bordn}
+    \end{figure}
+    By gluing them, we got a morphism \ref{fig:GluingMorBordn}
+\begin{figure}[H]
+  \centering
+  \incfig{GluingMorBordn}
+  \caption{composition of 2 morphism}
+  \label{fig:GluingMorBordn}
+\end{figure}
+    Denote \(\gamma=\mathcal{Z}(E\times [0,1]:\emptyset\to \bar{E}\sqcup E )\). Notice that 
+    \begin{align}
+      \mathcal{Z}(E\times [0,1]\sqcup E\times [0,1]:E\to E\sqcup \bar{E}\sqcup E) & =\mathrm{id}_{\mathcal{Z}(E)}\otimes\gamma,\\
+      \mathcal{Z}(E\times [0,1]\sqcup E\times [0,1]:E\sqcup \bar{E}\sqcup E\to E) & = d_{E}\otimes \mathrm{id}_{\mathcal{Z}(E)},
+    \end{align}
+    hence
+    \begin{equation}\label{eq:ZorroMoves}
+      (d_{E}\otimes \mathrm{id}_{\mathcal{Z}(E)})\circ (\mathrm{id}_{\mathcal{Z}(E)}\otimes\gamma)=\mathrm{id}_{\mathcal{Z}(E)}.
+    \end{equation}
+    Assume that
+    \[
+      \gamma(1)=\sum_{i\in I}\bar{v}_i\otimes v_i,
+    \]
+    where \(\{ v_{i}|i\in I \}\) is linear independent, then for \(v\in \mathcal{Z}(E )\), we have 
+    \begin{equation}\label{eq:compo-id}
+      v\cong v\otimes 1\mapsto v\otimes\left( \sum_{i\in I}\bar{v}_i\otimes v_i \right)\mapsto \sum_{i\in I}d_{E }(v,\bar{v}_{i})v_i=v, 
+    \end{equation}
+    \eqref{eq:compo-id} shows that \(\mathcal{Z}(E )\) is spanned by a finite set \(\{ v_{i}|i\in I \}\) and the pairing \(d_{E }\) is non-degenerated, and it gives a canonical isomorphism \(\mathcal{Z}(\bar{E})\cong \mathcal{Z}(E )^{*}\) defined by
+    \begin{equation}
+      \bar{v}\mapsto d_{E}(-,\bar{v}).
+    \end{equation}
+    \end{proof}
+    
+    \begin{remark}
+      In the language of category \(\mathcal{DP}\) of dual pairs, \eqref{eq:ZorroMoves} is called the Zorro moves, and the linear maps \(\gamma\) and \(d_{E }\) are called birth and death, respectively, which we will explain in \S \ref{SSS:TQFTdim1}.
+    \end{remark}
+    \begin{corollary}
+      Let E be an object in \(\mathrm{Bord}_{n}\). Then for \(k \in \mathbb{K}\), we have 
+      \[
+        \mathcal{Z}(E\times S^{1})(k)=\dim \mathcal{Z}(E )\cdot k .
+      \]
+    \end{corollary}
+
+    \begin{figure}[H]
+      \centering
+      \incfig{trBord}
+      \caption{Trace}
+      \label{fig:trBord}
+    \end{figure}
+
+    \begin{proof}
+      \(E\times S^{1}\) is a morphism from \(\emptyset\) to \(\emptyset\) without ambiguity, and it is the composition of two morphisms in the figure \ref{fig:trBord}. Hence \(\mathcal{Z}(E\times S^{1})\) is a morphism from \(\mathbb{K}\) to \(\mathbb{K}\). By taking \(v=v_{j}\) in \eqref{eq:compo-id}, we get 
+      \[
+        d_{E }(v_{j},\bar{v}_{i})=\delta_{i,j},
+      \]
+      hence 
+      \[
+        \mathcal{Z}(E\times S^{1})(1)=d_{\bar{E}}\circ\gamma(1)=\sum_{i\in I}d_{\bar{E}}(\bar{v}_{i}\otimes v_i)=|I|=\dim \mathcal{Z}(E).
+      \]
+    \end{proof}
+
+
+    Given a \(n \)-dimensional TQFT \(\mathcal{Z}:\mathrm{Bord}_{n }\to \mathrm{Vect}_{\mathbb{K}}\) and an oriented compact \(r \)-dimensional manifold \(X\) with \(r<n\), we have the following reduced TQFT of dimension \(n-r\)
+    \begin{equation}
+      \mathcal{Z}^{\text{red}}:\mathrm{Bord}_{n}\to \mathrm{Vect}_{\mathbb{K}},\quad \mathcal{Z}^{\text{red}}(E\xrightarrow{M} F ):=\mathcal{Z}(E\times X\xrightarrow{M\times X}F\times X).
+    \end{equation}
+    We have the following commutative diagram of symmetric monoidal categories
+    \[
+      \begin{tikzcd}
+        {\mathrm{Born}_{n-r}} && {\mathrm{Born}_n} \\
+        \\
+        & {\mathrm{Vect}_{\mathbb{K}}}
+        \arrow["{-\times X}", from=1-1, to=1-3]
+        \arrow["{\mathcal{Z}}"', from=1-1, to=3-2]
+        \arrow["{\mathcal{Z}^{\text{red}}}", from=1-3, to=3-2]
+      \end{tikzcd}.
+    \]
+    From this one can see the reason why a higher dimensional TQFT is more complicated than a lower dimensional one. 
+    
+    Sometimes we want to see if two TQFTs \(\mathcal{Z}\) and \(\mathcal{Z}'\) of dimensional \(n\) are equivalent. For this purpose, it is enough to show that they are equivalent for connected manifolds since the results for disconnected manifolds can be obtained from multiplications in categories.
+
+    \section{Lower dimensional examples}
+
+    \subsection{TQFT of dimension 1}\label{SSS:TQFTdim1}
+    There are only two objects in \(\mathrm{Obj}(\mathrm{Bord}_{n})\):
+    \begin{equation}
+      \bullet_{+}, \bullet_{-},
+    \end{equation}
+    i.e. two points with different orientations. And it can be proved by using Morse theory that every morphism can be obtained by composing and tensoring the following 6 elements:
+\begin{figure}[H]
+  \centering
+  \incfig{GenTQFT1}
+  \caption{identity and generators}
+  \label{fig:GenTQFT1}
+\end{figure}
+
+    TQFT of dimension 1 is simple since there is a bijection \((\mathcal{Z}:\mathrm{Bord}_{1}\to \mathrm{Vect}_{\mathbb{K}})\mapsto \mathcal{Z}(\bullet_{+})\) between TQFT of dimension 1 and finite dimensional vector spaces over \(\mathbb{K}\). To make this precisely, we need the concepts of the category \(\mathcal{DP}\) of \emph{dual pairs}:
+    \begin{itemize}
+        \item The objects in \(\mathcal{DP}\) are 4 tuples \((U,V,b,d)\) where the birth \(b:\mathbb{K}\to U\otimes V\) and death \(d:V\otimes U\to \mathbb{K}\) are linear maps and \(U,V \) are linear spaces dual to each other in the sense that they satisfy the following Zorro moves 
+        \begin{equation}
+          \begin{aligned}
+            (d\otimes \mathrm{id}_{V })\circ(\mathrm{id}_{V}\otimes b )&=\mathrm{id}_{V }, \\
+            (\mathrm{id}_{U}\otimes d )\circ(b\otimes \mathrm{id}_{U })&=\mathrm{id}_{U }.
+          \end{aligned}
+        \end{equation}
+        \item A morphism from \((U,V,b,d)\) to \((U',V',b',d')\) is a pair \((f,g)\) of linear maps where \(f:U\to U'\) and \(g:V\to V'\) such that \[
+          b'=(f\otimes g)\circ b, \quad d'=d\circ(g\otimes f).
+        \]
+    \end{itemize}
+    \begin{theorem}
+      The functor \(\mathcal{Z}\to (\mathcal{Z}(\bullet_{+}),\mathcal{Z}(\bullet_{-}),\mathcal{Z}(\bullet_{+}\sqcup\bullet_{-}\to \emptyset),\mathcal{Z}(\bullet_{-}\sqcup\bullet_{+}\to \emptyset))\) is an equivalence of groupoid between 1-dimensional TQFT and \(\mathcal{DP}_{\mathbb{K}}\).
+    \end{theorem}
+
+    \begin{remark}
+      TQFQ of dimension \(n\) itself is a groupoid (See \cite[\S 2.5]{carquevilleIntroductoryLecturesTopological2018}), but \(\mathrm{Vect}_{\mathbb{K}}\) is not a groupoid. In the above statement, we just throw out the non-invertible linear maps in \(\mathrm{Vect}_{\mathbb{K}}\) to get a groupoid whose objects consisting of vector spaces.
+    \end{remark}
+    If we denote \(V=\mathcal{Z}(\bullet_{+})\), then we have 
+    \begin{align}
+      &\mathcal{Z}(\bullet_{+}^{\sqcup m}\sqcup\bullet_{-}^{\sqcup n})=V^{\otimes m}\otimes_{\mathbb{K}}(V^{*})^{\otimes n}\\ 
+      &\mathcal{Z}(\bullet_{-}\sqcup\bullet_{+}\to \emptyset): (V^{*})\otimes V \to \mathbb{K},&&f\otimes v\mapsto f(v ),\\
+      &\mathcal{Z}(\emptyset\to\bullet_{+}\sqcup\bullet_{-}):\mathbb{K}\to V\otimes V^{*}, &&k\mapsto k \sum_{i\in I}e_{i}\otimes f^{i},\\
+      & \mathcal{Z}(\bullet_{+}\sqcup\bullet_{-}\to \emptyset): V\otimes(V^{*}) \to \mathbb{K},&&v\otimes f\mapsto f(v ),\\
+      &\mathcal{Z}(\emptyset\to\bullet_{-}\sqcup\bullet_{+}):\mathbb{K}\to V^{*}\otimes V, &&k\mapsto k \sum_{i\in I}f_{i}\otimes e^{i},\\
+      &\mathcal{Z}(\bullet_{+}\sqcup\bullet_{+}\to \bullet_{+}\sqcup\bullet_{+}):V\otimes V\to V\otimes V ,&&u\otimes v\mapsto v\otimes u.
+    \end{align}
+
+    As the end of this section, we mention that TQFT of dimension 1 is freely generated as a symmetric monoidal category by the objects 
+    \begin{equation}
+      \bullet_{+},\quad \bullet_{-},
+    \end{equation}
+    and the morphisms 
+\begin{figure}[H]
+  \centering
+  \incfig{MorGenDim1}
+  \caption{Generators of morphisms}
+  \label{fig:MorGenDim1}
+\end{figure}
+    subject to the relations
+\begin{figure}[H]
+  \centering
+  \incfig{RalMorDim1}
+  \caption{Relations of morphisms}
+  \label{fig:RalMorDim1}
+\end{figure}
+
+    For details of freely generated symmetric monoidal categories and the explicit construction of these categories from generators and relations, see \cite[\S 3.2]{carquevilleIntroductoryLecturesTopological2018}.
+
+    \subsection{TQFT of dimension 2}
+
+    At first, we consider the source category \(\mathrm{Bord}_{2}\). Objects in \(\mathrm{Bord}_{2}\) is generated by 
+    
+    
+    \begin{equation}
+      G_{0}=\{ S^{1} \},
+    \end{equation}
+    and morphism in \(\mathrm{Bord}_{2}\) can be obtained by composing and tensoring the following elements
+\begin{figure}[H]
+  \centering
+  \incfig{GenMorDim2}
+  \caption{Elementary morphisms in \(\mathrm{Bord}_{2}\)}
+  \label{fig:GenMorDim2}
+\end{figure}
+    Here the first one is the identity on \(S^{1}\) and the last one is the braiding bordism. One can drop the identity and the braiding bordism to get the set \(G_{1}\) of generators of morphisms. And the set \(G_{2}\) relations are given by 
+\begin{figure}[H]
+  \centering
+  \incfig{associativity}
+  \caption{Associative law}
+  \label{fig:associativity}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \incfig{commutativelaw}
+  \caption{Unit}
+  \label{fig:R2}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \incfig{relation3}
+  \caption{Zorro moves}
+  \label{fig:relation3}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \incfig{commu}
+  \caption{Commutative law}
+  \label{fig:commu}
+\end{figure}
+    There are some redundant relations in above figures, and we do not try to find a set of minimal relations. The main theorem of \(\mathrm{Bord}_{2}\) is follows.
+    \begin{theorem}
+      \(\mathrm{Bord}_{2}\) is freely generated as a symmetric monoidal category by \(G_{0},G_1,G_2\).
+    \end{theorem}
+    Set \(A=\mathcal{Z}(S^{1})\), and we denote the action of a given TQFT \(\mathcal{Z}:\mathrm{Bord}_{2}\to \mathrm{Vect}_{\mathbb{K}}\) on generators by 
+
+\begin{figure}[H]
+  \centering
+  \incfig{ZActOnGen}
+  \caption{Actions of \(\mathcal{Z}\) on \(G_{1}\)}
+  \label{fig:ZActOnGen}
+\end{figure}
+    According the relations \ref{fig:associativity}-\ref{fig:commu}, we can define the Frobenius algebra as follows.
+    \begin{definition}\label{def:Frob-TQFT}
+      A \emph{Frobenius algebra} over \(\mathbb{K}\) is a \(\mathbb{K}\)-vector space with
+      \begin{enumerate}[(1)]
+          \item an associative unital algebra structure \((A,\mu,\eta)\), i.e. 
+          \begin{align}
+            \mu\circ(\mu\otimes \mathrm{id})&=\mu\circ(\mathrm{id}\otimes \mu),\label{eq:R11}\\
+            \mu\circ(\eta\otimes \mathrm{id})&= \mathrm{id}=\mu\circ(\mathrm{id}\otimes \eta)\label{eq:R21},
+          \end{align}
+          \item a coassociative counital coalgebra structure \((A,\Delta,\varepsilon)\), i.e.
+          \begin{align}
+            (\Delta\otimes \mathrm{id})\circ\Delta&=(\mathrm{id}\otimes\Delta)\circ\Delta,\label{eq:R12}\\
+            (\varepsilon\otimes \mathrm{id})\circ\Delta&=\mathrm{id}=(\mathrm{id}\otimes\varepsilon)\circ\Delta,\label{eq:R22}
+          \end{align}
+      \end{enumerate}
+      such that
+      \begin{equation}\label{eq:R3}
+        (\mu\otimes \mathrm{id})\circ(\mathrm{id}\otimes\Delta)=\Delta\circ\mu=(\mathrm{id}\otimes\mu)\circ(\Delta\otimes \mathrm{id}).
+      \end{equation}
+    \end{definition}
+    
+    The equations \eqref{eq:R11} and \eqref{eq:R12} correspond to figure \ref{fig:associativity}, \eqref{eq:R21} and \eqref{eq:R22} correspond to figure \ref{fig:R2}, and \eqref{fig:commu} corresponds to figure \ref{fig:relation3}.
+
+    A morphism between Frobenius algebras \(\psi:A\to A\) is a \(\mathbb{K}\) linear maps keeping the algebra structures and the coalgebra structures, i.e. 
+    \begin{equation}
+      \mu'(\psi\otimes\psi)=\psi\circ\mu,\quad \eta'=\psi\circ\eta,\quad (\psi\otimes\psi)\circ\Delta=\Delta'\circ\psi,\quad \varepsilon=\varepsilon'\circ\psi.
+    \end{equation}
+    Frobenius algebras with their morphisms form a category, and we denote the full subcategory of commutative Frobenius algebras by \(\mathrm{comFrob}_{\mathbb{K}}\), then we have 
+    \begin{theorem}\label{thm:Dim2<->comFrob}
+      The functor \(\{ \mathcal{Z}:\mathrm{Bord}_{2}\to \mathrm{Vect}_{\mathbb{K}}|\mathcal{Z}\text{ is a TQFT} \}\to \mathrm{comFrob}_{\mathbb{K}}\) defined by 
+      \begin{equation}
+        \mathcal{Z}\to \mathcal{Z}(S^{1})
+      \end{equation}
+      is an equivalence of groupoid.
+    \end{theorem}
+
+    \begin{remark}\label{rmk:extensionofTQFT}
+      The proof of Theorem \ref{thm:Dim2<->comFrob} can be generalized to symmetric monoidal functor \(\mathcal{Z}:\mathrm{Bord}_{2}\to \mathcal{C}\) for any symmetric monoidal category \(\mathcal{C}\). An example is given in Example \ref{exm:dRHomology}.
+    \end{remark}
+
+    The Definition \ref{def:Frob-TQFT} of Frobenius algebra is a bit cumbersome, so we will use the simple one in the following which is equivalent to Definition \ref{def:Frob-TQFT}.
+
+    \begin{definition}\label{def:Frob-origin}
+      A Frobenius algebra \(\mathbb{K}\) is an unital associative \(\mathbb{K}\)-algebra with a nondegenerate and invariant bilinear form \(\braket{-,-} :A\times A\to A \).
+    \end{definition}
+    \begin{remark}
+      The proof of Theorem
+    \end{remark}
+    In the definition above, the invariance of \(\braket{-,-} \) means
+    \[
+      \braket{a,b\cdot c}=\braket{a\cdot b,c}.  
+    \]
+    The correspondence between Definition \ref{def:Frob-origin} and \ref{def:Frob-TQFT} is given by the follows. 
+    
+    \begin{itemize}
+        \item To produce a Frobenius algebra in Definition \ref{def:Frob-TQFT} by using Definition \ref{def:Frob-origin}, we can define the algebra structure by 
+        \[
+          \mu(a\otimes b )= a\cdot b, \quad \eta(k )=k\cdot e
+        \]
+        for \(a,b \in A \) and \(e \) is the unit in \(A\). To obtain the coalgebra structure, we need a pair of dual basis \(\{ e_{i} \},\{ f_i \}\) in the sense that
+        \[
+          \braket{e_i,f_j}=\delta_{i,j}, 
+        \]
+        then we can define the copairing by
+        \begin{equation}
+          c(\lambda)=\lambda\sum_{i}e_i\otimes f_i.
+        \end{equation}
+        And the comultiplication and co unit is give by
+        \begin{equation}
+          \Delta(a)=(\mu\otimes \mathrm{id})\circ(a\otimes c(1))=\sum_{i}(a\cdot e_i)\otimes f_i,\quad \varepsilon(a )=\braket{a,e} .
+        \end{equation}
+        \item To produce a Frobenius algebra in Definition \ref{def:Frob-origin} by using Definition \ref{def:Frob-TQFT}, the unit is given by \(e=\eta(1)\), the multiplication is given by \(a\cdot b=\mu(a\otimes b)\) and the pairing is given by 
+        \begin{equation}
+          \braket{a,b} =\varepsilon(a\cdot b)
+        \end{equation}
+    \end{itemize}
+    One can check by calculation directly that the above structure is what we need. For details, see \cite[Chapter 2]{kockFrobeniusAlgebras2d2004}. 
+
+    Here are some interesting examples of TQFT of dimension 2. 
+    
+    \begin{example}[Affine Landau-Ginzburg models]
+      Let \(W\in \mathbb{C}[x_1,\ldots ,x_{n}]\) be a polynomial with only isolated singularity. Then the quotient 
+      \begin{equation}
+        A:=\mathbb{C}[x_1,\ldots,x_n ]/(\partial_{x_1}W,\dots,\partial_{x_n}W)
+      \end{equation}
+      is a finite-dimensional over \(\mathbb{C}\). The unit and the multiplication in \(A\) is obvious, and the pairing is given by 
+      \begin{equation}
+        \braket{P,Q} =\mathrm{Res}\left[ \frac{P\cdot Q \mathrm{d}x}{\partial_{x_1}W\cdot \cdots\cdot \partial_{x_n}W } \right] ,
+      \end{equation}
+    \end{example}
+    then \(A\) is a Frobenius algebra. TQFTs associated to Frobenius algebras of this type is called \emph{affine Landau-Ginzburg models}\cite{vafaTOPOLOGICALLANDAUGINZBURGMODELS1991,herbstLocalizationTracesOpenclosed2005,carquevilleAdjunctionsDefectsLandau2016}. 
+
+    \begin{example}\label{exm:dRHomology}
+      Let \(X\) be a real compact oriented \(n\)-dimensional manifold, and denote the de Rham cohomology of \(X\) by
+      \begin{equation}
+        \tilde{A}:=H^{*}_{\text{dR}}(X)=\bigoplus_{k=0}^{n}H_{\text{dR}}^{k}(X).
+      \end{equation}
+      Then \(\tilde{A}\) is a Frobenius algebra which is only graded commutative with unit \(1\in H^{0}_{\text{dR}}(X)\), multiplication \(\wedge\) and the Poincar\'{e} pairing
+      \begin{equation}
+        \braket{\alpha,\beta} =\int_{X}\alpha\wedge\beta.
+      \end{equation}
+      By taking the even part \(A:=H^{\text{ev}}_{\text{dR}}(X)\) of \(H^{*}_{\text{dR}}(X)\) we get a commutative Frobenius algebra, hence a TQFT of dimension 2.
+
+      As we remark in \ref{rmk:extensionofTQFT}, we can change the target category \(\mathrm{Vect}_{\mathbb{K}}\) to the category \(\mathrm{Vect}_{\mathbb{K}}^{\mathbb{Z}_{2}}\) of \(\mathbb{Z}_{2}\) graded vector spaces. It makes sense because the symmetry condition
+      \[
+        A\otimes_{\mathcal{C}}B\cong B\otimes_{\mathcal{C}} A
+      \]
+      in the definition of symmetric monoidal category is only an isomorphism, which can not imply the symmetry of multiplication if we change the braiding isomorphism in \(\mathrm{Vect}_{\mathbb{K}}\). If we take the braiding isomorphisms in \(\mathrm{Vect}_{\mathbb{K}}^{\mathbb{Z}_{2}}\) to be the graded isomorphisms
+      \begin{equation}
+        x\otimes y\mapsto (-1)^{|x||y|}y\otimes x,
+      \end{equation}
+      where \(x\in A, y\in B\) are homogeneous elements and \(|x|,|y|\) denotes the degrees of \(x\) and \(y\) respectively, \(\mathrm{Vect}_{\mathbb{K}}^{\mathbb{Z}_{2}}\) is also a symmetric monoidal category, and we can also regard \(\tilde{A}\) as a TQFT of dimension 2 corresponding to \(\tilde{\mathcal{Z}}:\mathrm{Bord}_{2}\to \mathrm{Vect}_{\mathbb{K}}^{\mathbb{Z}_{2}}\) which generalizes the concepts of TQFT.
+    \end{example}
+    
+    \addcontentsline{toc}{section}{References}
+    \bibliographystyle{alpha}
+    \bibliography{ref}
+\end{document}

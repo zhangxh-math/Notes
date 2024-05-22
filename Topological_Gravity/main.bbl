@@ -1,0 +1,28 @@
+\begin{thebibliography}{Wit90b}
+
+\bibitem[DW18]{dijkgraafDevelopmentsTopologicalGravity2018}
+Robbert Dijkgraaf and Edward Witten.
+\newblock Developments in {{Topological Gravity}}.
+\newblock {\em International Journal of Modern Physics A}, 33(30):1830029, October 2018.
+
+\bibitem[FGZ95]{francesco2DGravityRandom1995}
+P.~Di Francesco, P.~Ginsparg, and J.~{Zinn-Justin}.
+\newblock {{2D}} gravity and random matrices.
+\newblock {\em Physics Reports}, 254(1):1--133, March 1995.
+
+\bibitem[Kon92]{kontsevichIntersectionTheoryModuli1992}
+Maxim Kontsevich.
+\newblock Intersection theory on the moduli space of curves and the matrix airy function.
+\newblock {\em Communications in Mathematical Physics}, 147(1):1--23, June 1992.
+
+\bibitem[Wit90a]{wittenStructureTopologicalPhase1990}
+Edward Witten.
+\newblock On the structure of the topological phase of two-dimensional gravity.
+\newblock {\em Nuclear Physics B}, 340(2-3):281--332, 1990.
+
+\bibitem[Wit90b]{wittenTwodimensionalGravityIntersection1990}
+Edward Witten.
+\newblock Two-dimensional gravity and intersection theory on moduli space.
+\newblock {\em Surveys in differential geometry}, 1(1):243--310, 1990.
+
+\end{thebibliography}

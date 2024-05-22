@@ -1,0 +1,105 @@
+\documentclass[10pt,reqno,draft]{article}
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm,version}
+\usepackage{mathrsfs,fancybox,pifont}
+\usepackage{graphicx}
+\usepackage{url,hyperref}
+\usepackage[notcite,notref]{showkeys}
+\usepackage{color}
+\usepackage{subfigure,multirow}
+\usepackage{epstopdf}
+\usepackage{cases}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathtools}
+\usepackage{algorithm,algorithmic}
+\usepackage{authblk}
+%\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{tikz-cd}
+%\usepackage{MnSymbol}
+\usepackage{braket}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgscale{0.38}
+    \import{./Figures/}{#1.pdf_tex}
+}
+
+\allowdisplaybreaks
+
+\setlength{\textwidth}{15cm}
+\setlength{\textheight}{21.6cm}
+\setlength{\oddsidemargin}{.5cm}
+\setlength{\evensidemargin}{.5cm}
+\baselineskip 13pt
+
+%\renewcommand{\baselinestretch}{1.1}
+\renewcommand {\thefootnote}{\fnsymbol{footnote}}
+
+%Notation
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+% number of equation, figure and table
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% command for equations, theorems and lemmas etc.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[theorem]
+
+\title{Hitchin System}
+\author[1]{Xuhui Zhang\thanks{zhangxh.math@gmail.com}}
+%\author[1]{JIAN ZHOU\thanks{jianzhou@mail.tsinghua.edu.cn}}
+%\author[2]{Author C\thanks{C.C@university.edu}}
+%\author[2]{Author D\thanks{D.D@university.edu}}
+\affil[1]{Department of Mathematical Science, Tsinghua University}
+%\affil[2]{Department of Mechanical Engineering, \LaTeX\ University}
+
+% Corresponding author. {\it Email address:} xyz@math.univ.edu.
+
+%\author{D. Doe, P. T. Frank, and J. E. Smith\thanks{ {\it Email address:} xyz@math.univ.edu.}\
+%\small Department of Mathematics, XXX University,\
+%\small City 123456, China}
+
+\date{\today}
+
+\begin{document}
+    \maketitle
+	This is a note of Hitchin system.
+
+	\section{Higgs Bundle}
+	\begin{definition}
+	    A \emph{Higgs bundle} is a pair \((E,\varphi)\) consisting a holomorphic vector bundle \(E\) and a holomorphic 1-form \(\varphi\) with value in the bundle of endomorphisms of \(E\) such that 
+	    \begin{equation}
+	      \varphi\wedge\varphi=0.
+	    \end{equation}
+	\end{definition}
+	Such pair was introduced by Nigel Hitchin \cite{hitchinSelfDualityEquationsRiemann1987}. The term "Higgs bundle" and the condition \(\varphi\wedge\varphi=0\) was introduced by Carlos Simpson\cite{simpsonHiggsBundlesLocal1992}. I will explain the condition \(\varphi\wedge\varphi=0\) more carefully. For 2 holomorphic 1-form \(\varphi\) and \(\psi\) with the local expressions 
+	\begin{equation}
+	  \varphi=\sum_{j=1}^{m} A_{j}(z)\dd z^{j}\quad \psi=\sum_{j=1}^{m} B_{j}(z)\dd z^{j},
+	\end{equation}
+	then we have 
+	\begin{equation}
+	  \varphi
+	\end{equation}
+
+	\addcontentsline{toc}{section}{References}
+    \bibliographystyle{alpha}
+    \bibliography{ref}
+\end{document}

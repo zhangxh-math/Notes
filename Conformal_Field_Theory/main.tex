@@ -1,0 +1,240 @@
+\documentclass[10pt,reqno,draft]{article}
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm,version}
+\usepackage{mathrsfs,fancybox,pifont}
+\usepackage{graphicx}
+\usepackage{url,hyperref}
+\usepackage[notcite,notref]{showkeys}
+\usepackage{color}
+\usepackage{subfigure,multirow}
+\usepackage{epstopdf}
+\usepackage{cases}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathtools}
+\usepackage{algorithm,algorithmic}
+\usepackage{authblk}
+%\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{tikz-cd}
+%\usepackage{MnSymbol}
+\usepackage{braket}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgscale{0.38}
+    \import{./Figures/}{#1.pdf_tex}
+}
+
+\allowdisplaybreaks
+
+\setlength{\textwidth}{15cm}
+\setlength{\textheight}{21.6cm}
+\setlength{\oddsidemargin}{.5cm}
+\setlength{\evensidemargin}{.5cm}
+\baselineskip 13pt
+
+%\renewcommand{\baselinestretch}{1.1}
+\renewcommand {\thefootnote}{\fnsymbol{footnote}}
+
+%Notation
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+% number of equation, figure and table
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% command for equations, theorems and lemmas etc.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[theorem]
+
+\title{Conformal Field Theory}
+\author[1]{Xuhui Zhang\thanks{zhangxh.math@gmail.com}}
+%\author[1]{JIAN ZHOU\thanks{jianzhou@mail.tsinghua.edu.cn}}
+%\author[2]{Author C\thanks{C.C@university.edu}}
+%\author[2]{Author D\thanks{D.D@university.edu}}
+\affil[1]{Department of Mathematical Science, Tsinghua University}
+%\affil[2]{Department of Mechanical Engineering, \LaTeX\ University}
+
+% Corresponding author. {\it Email address:} xyz@math.univ.edu.
+
+%\author{D. Doe, P. T. Frank, and J. E. Smith\thanks{ {\it Email address:} xyz@math.univ.edu.}\
+%\small Department of Mathematics, XXX University,\
+%\small City 123456, China}
+
+\date{\today}
+
+\begin{document}
+    \maketitle
+	This is a note of \cite{gaberdielIntroductionConformalField2000}, and we focus on the 2D conformal theory.
+	\section{General structure of a local conformal theory}
+	\subsection{The space of states}
+	Generally speaking, the space of states is a Hilbert space \(\mathcal{H}\) and the correlation functions are defined for some dense subspace \(\mathcal{F}\) of \(\mathcal{H}\). Let \(\Omega\) be the vacuum state in \(\mathcal{F}\) and \((-,-)\) be the inner product of \(\mathcal{H}\). A 2D conformal field theory is defined on a Riemann surface with the coordinate \(z\), we will assign an smooth operator field \(V(\psi,z)\) to each state \(\psi\in \mathcal{F}\) such that 
+	\begin{equation}
+	  \psi=V(\psi,z_{0})\Omega 
+	\end{equation}
+	for some \(z_0\) which we assume to be 0 usually. The correlation function is defined by
+	\begin{equation}
+		\braket{V(\psi_1,z_1)\cdots V(\psi_{n},z_{n})}:=(\Omega,V(\psi_1,z_1)\cdots V(\psi_{n},z_{n})\Omega).
+	\end{equation}
+	The point \(z_0\) is called the "past infinity" in physics. If we fix a future infinity \(z_{\infty}\), we will get some sense of time evolution. 
+
+	Given a state \(\psi\in \mathcal{F}\), if for any state \(\psi_{i}\in \mathcal{F}\), the correlation functions 
+	\begin{equation}
+		\braket{V(\psi,z)V(\psi_1,z_1)\cdots V(\psi_{n},z_{n})}
+	\end{equation}
+	is a meromorphic function, then \(\psi\) is called a meromorphic state. The space \(\mathcal{F}_{0}\) consisting of all meromorphic states is called a meromorphic subtheory of \(\mathcal{H}\). Similarly, there is an anti-meromorphic subtheory \(\overline{\mathcal{F}}_{0}\) with a similar definition. 
+
+	The correlation functions of the theory determine the \emph{operator product expansion}(OPE)
+	\begin{equation}\label{eq:OPE}
+	  V(\psi_{i},z_1)V(\psi_2,z_2)=\sum_{i} (z_1-z_2)^{\Delta_{i}}(\bar{z}_{1}-\bar{z}_{2})^{\overline{\Delta}_{i}}\sum_{r,s\ge 0} V(\phi_{r,s}^{i},z_2)(z_1-z_2)^{r}(\bar{z}_{1}-\bar{z}_{2})^{s},
+	\end{equation}
+	where \(\Delta_{i},\overline{\Delta}_{i}\in \mathbb{R}\) and \(r,s \in \mathbb{N}\) and \(\psi_1,\psi_2,\phi_{r,s}^{i}\in \mathcal{F}\). The OPE \eqref{eq:OPE} defined so-called a vertex operator algebra of meromorphic fields and anti-meromorphic fields in \cite{borcherdsMonstrousMoonshineMonstrous1992,borcherdsVertexAlgebrasKacMoody1986}. The OPE can be read off from 
+	\begin{equation}
+		\begin{aligned}
+			&\braket{ V(\psi_{i},z_1)V(\psi_2,z_2)V(\phi_1,w_1)\cdots V(\phi_n,w_{n})}\\
+			=&\sum_{i} (z_1-z_2)^{\Delta_{i}}(\bar{z}_{1}-\bar{z}_{2})^{\overline{\Delta}_{i}}\sum_{r,s\ge 0} (z_1-z_2)^{r}(\bar{z}_{1}-\bar{z}_{2})^{s}\braket{V(\phi_{r,s}^{i},z_2)V(\psi_1,w_1)\cdots V(\psi_{n},w_{n})}.
+		\end{aligned}
+	\end{equation}
+	Since the OPE is associative,  \(\mathcal{F}\) is a representation of two vertex operator algebras. \(\mathcal{F}\) can be decomposed into indecomposable representations 
+	\begin{equation}\label{eq:indecomposable}
+	  \mathcal{H}=\bigoplus_{(j,\bar{j})}\mathcal{H}_{(j,\bar{j})}.
+	\end{equation}
+	If the decomposition \eqref{eq:indecomposable} is finite, then we call this theory a finite theory.
+	\subsection{Modular invariance}
+	To introduce the modular invariance, we consider torus, i.e. the Riemann surface of genus 1. Recall that complex structures of torus is parametrized by \(\tau\in \{z\in \mathbb{C}|\mathrm{Im} z>0\} \) modular the action 
+	\begin{equation}
+	  \tau\mapsto A\tau=\frac{a\tau+b}{c\tau+d},
+	\end{equation}
+	where
+	\begin{equation}
+	  A=\begin{pmatrix}
+		  a & b \\
+		  c & d	 
+	  \end{pmatrix}
+	  \in \mathcal{M}:=SL(2,\mathbb{Z})/\mathbb{Z}_{2}.
+	\end{equation}
+	If we cut the torus along a non-trivial cycle, we can obtain a annulus, on which there is a propagator along the annulus:
+	\begin{equation}
+		\mathcal{O}(q,\bar{q})=q^{L_{0}-\frac{c}{24}}\bar{q}^{\bar{L}_{0}-\frac{\bar{c}}{24}}
+	\end{equation}
+	The vacuum correlator(or the partition function) on the torus is describe by the trace of \(\mathcal{O}(q,\bar{q})\):
+	\begin{equation}
+		\sum_{(j,\bar{j})} \operatorname{Tr}_{\mathcal{H}_{(j,\bar{j})}}\mathcal{O}(q,\bar{q}),
+	\end{equation}
+	where \(L_0\) and \(\bar{L}_0\) are the scaling operators of two vertex algebras and \(c\) and \(\bar{c}\) their central charges. In our case of torus, \(q=e^{2\pi i\tau}\). Since \(\tau\) and \(A\tau\) describe the same torus, the partition function is invariant under the transformation \(\tau\mapsto A\tau\).
+
+	In most of cases, 
+	\begin{equation}
+	  \mathcal{H}_{(j,\bar{j})}=\mathcal{H}_{j}\otimes\mathcal{H}_{\bar{j}}
+	\end{equation}
+	where \(\mathcal{H}_{j}\) is an irreducible representation of meromorphic vertex operator algebra and \(\mathcal{H}_{\bar{j}}\) is an irreducible representation of anti-meromorphic vertex operator algebra. The partition function on the torus is given by 
+	\begin{equation}
+	  \sum_{(j,\bar{j})} \chi_{j}(\tau)\bar{\chi}_{\bar{j}}(\bar{\tau}),
+	\end{equation}
+	where \(\chi_{j}(\tau)=\operatorname{Tr}_{\mathcal{H}_{j}}(q^{L_0-\frac{c}{24}}) \) and the \(\bar{\chi}_{\bar{j}}(\bar{\tau})\) is defined by a similar formula. A remarkable fact about a big class of vertex operator algebras is that characters transform into one another under the modular group \(\mathcal{M}=SL(2,\mathbb{Z})/\mathbb{Z}_{2}\)
+	\begin{equation}
+		\chi_{j} \left( -\frac{1}{\tau} \right) =\sum_{k} S_{j}^{k}\chi_{k}(\tau),\quad \chi_{j}(\tau+1)=\sum_{k} T_{j}^{k}\chi_{k}(\tau).
+	\end{equation}
+	And we define \(\bar{S}_{\bar{j}}^{\bar{k}}\) and \(\bar{T}_{\bar{j}}^{\bar{k}}\) by a similar method for anti-meromorphic vertex operator algebra. Assume that 
+	\begin{equation}
+	  \mathcal{H}=\bigoplus_{i,\bar{j}}M^{i\bar{j}}\mathcal{H}_{i}\otimes\bar{\mathcal{H}}_{\bar{j}}.
+	\end{equation}
+	Then we have 
+	\begin{equation}
+	  \sum_{i,\bar{j}} S_{i}^{l}M^{i,\bar{j}}\bar{S}_{\bar{j}}^{\bar{k}}=\sum_{i,\bar{j}} T_{i}^{l}M^{i,\bar{j}}\bar{T}_{\bar{j}}^{\bar{k}}=M^{l\bar{k}}.
+	\end{equation}
+	This provides powerful constrains for matrix \(M^{i\bar{j}}\). In the case of finite theory, these conditions allow one to obtain finite solution and a nice classification. See \cite{cappelliModularInvariantPartition1987,cappelliADEClassificationMinimal1987,gannonCappelliItzyksonZuberADEClassification2000} and \cite{gannonClassificationSUModular,gannonModularInvariantsMinimal1997}.
+
+	\section{Meromorphic conformal field theory on the sphere}
+	In this section, our main objects are the meromorphic fields in \(\mathcal{F}_{0}\). For each meromorphic field \(\psi\), there is a vertex operator \(V(\psi,z)\) which create \(\psi\) from the vacuum state \(\Omega\). The operators are assume to be local in the sense that 
+	\begin{equation}
+	  V(\psi,z)V(\phi,w)=\varepsilon V(\phi,w)V(\psi,z)
+	\end{equation}
+	for \(z\neq w\). If \(\varepsilon=-2\), then \(\psi\) and \(\phi\) are both fermionic and \(\varepsilon=1\) otherwise. The meromorphic states space \(\mathcal{F}_{0}\) can be decomposed as 
+	\begin{equation}
+	  \mathcal{F}_{0}=\mathcal{F}_{0}^{B}\oplus\mathcal{F}_{0}^{F},
+	\end{equation}
+	where \(\mathcal{F}_{0}^{B}\) is the space of bosonic states and \(\mathcal{F}_{0}^{F}\) is the space of fermionic states. In the following text, we assume that a state is either fermionic or bosonic. 
+
+	We consider the transformation of states under M\"{o}bius group \(\mathcal{M}\). The generators of \(\mathcal{M}\) are 
+	\begin{equation}
+	  e^{\lambda\mathcal{L}_{-1}}(z)=z+\lambda,\quad e^{\lambda\mathcal{L}_{0}}(z)=e^{\lambda}z,\quad e^{\lambda\mathcal{L}_{1}}(z)=\frac{z}{1-\lambda z}.
+	\end{equation}
+	In the language of \(SL(2,\mathbb{C})\), we have 
+	\begin{equation}
+	  e^{\lambda\mathcal{L}_{-1}}=\begin{pmatrix}
+	    1 & \lambda\\
+	    0 & 1
+	  \end{pmatrix},\quad e^{\lambda\mathcal{L}_{0}}=\begin{pmatrix}
+	    e^{\frac{\lambda}{2}} &0\\
+	    0 & e^{-\frac{\lambda}{2}}
+	  \end{pmatrix},\quad e^{\lambda\mathcal{L}_{1}}=\begin{pmatrix}
+	    1&0\\
+	    -\lambda&1
+	  \end{pmatrix} .
+	\end{equation}
+	And the Lie algebra of \(\mathcal{M}\) is generated by 
+	\begin{equation}
+	  \mathcal{L}_{-1}=\begin{pmatrix}
+	    0 & 1\\
+	    0 & 0
+	  \end{pmatrix} ,\quad\mathcal{L}_{0}=\begin{pmatrix}
+	    \frac{\lambda}{2} & 0\\
+	    0 & -\frac{\lambda}{2}
+	  \end{pmatrix} ,\quad\mathcal{L}_{1}=\begin{pmatrix}
+	    0 & 0\\
+	    -1 & 0
+	  \end{pmatrix} .
+	\end{equation}
+	They satisfy the commutation relations
+	\begin{equation}
+	  [\mathcal{L}_{m},\mathcal{L}_{n}]=(m-n)\mathcal{L}_{m+n},\quad m,n=0,\pm 1. 
+	\end{equation}
+	
+	In physics, \(\mathcal{F}_{0}\) forms a representation of this algebra, and we associate the operator \(L_{m}\) to \(\mathcal{L}_{m}\). \(L_{0}\) can be identified with the energy operator, hence the spectrum of \(L_{0}\) is bounded from below. \(\mathcal{F}_{0}\) can be decomposed into irreducible representations, in a given irreducible highest weight representation, we denote by \(\psi\) the highest weight vector with weight \(h\). Since 
+	\begin{equation}
+	  L_{0}L_{1}\psi=\left( h-1 \right) L_{1}\psi,
+	\end{equation}
+	we have \(L_{1}\psi=0\). States with property 
+	\begin{equation}
+	  L_1\psi=0,\quad L_0\psi=h\psi
+	\end{equation}
+	are called \emph{quasiprimary}, and \(h\) is called the conformal weight of \(\psi\). Each quasiprimary state \(\psi\) generate a irreducible representation of \(sl(2,\mathbb{C})\) that consists of \(L_{-1}\)-descendants of \(\psi\). Notice that 
+	\begin{equation}
+	  L_1L_{-1}^{n}\psi=2n\left( h+\frac{1}{2}(n-1) \right) L_{-1}^{n-1}\psi,
+	\end{equation}
+	if \(h\) is an half integer, the above representation is given by \(\operatorname{ Span }_{\mathbb{C}}\{L_{-1}^{n}\psi|n\ge 0\} \) moduli the subrepresentation \(\operatorname{ Span } _{\mathbb{C}}\{L_{-1}^{n}\psi|n\ge 1-2h\} \). And we obtain a finite-dimensional irreducible representation. Then we have
+	\begin{equation}
+	  L_{-1}\Omega=L_{0}\Omega=L_1\Omega=0.
+	\end{equation}
+
+	Next, we consider the action of \(\mathcal{M}\) on correlation functions 
+	\begin{equation}
+	  \left<\prod_{i=1}^{n} V\left( \psi_{i},z_{i} \right)   \right>
+	\end{equation}
+	where \(\psi_{i}\) are all quasiprimary states with conformal weight \(h_{i}\). The action of \(\gamma\in \mathcal{M}\) on it is defined by 
+	\begin{equation}
+	  \left<\prod_{i=1}^{n} V\left( \psi_{i},z_{i} \right)   \right>=\prod_{i=1}^{n} \left( \frac{\dd \gamma\left( z_{i} \right) }{\dd z_{i}} \right)^{h_{i}} \left<\prod_{i=1}^{n} V\left( \psi_{i},\gamma\left( z_{i} \right) \right)   \right>
+	\end{equation}
+
+
+	\addcontentsline{toc}{section}{References}
+    \bibliographystyle{alpha}
+    \bibliography{ref}
+\end{document}

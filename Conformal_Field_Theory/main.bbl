@@ -1,0 +1,42 @@
+\begin{thebibliography}{CIZ87b}
+
+\bibitem[Bor86]{borcherdsVertexAlgebrasKacMoody1986}
+Richard~E. Borcherds.
+\newblock Vertex algebras, {{Kac-Moody}} algebras, and the {{Monster}}.
+\newblock {\em Proceedings of the National Academy of Sciences}, 83(10):3068--3071, May 1986.
+
+\bibitem[Bor92]{borcherdsMonstrousMoonshineMonstrous1992}
+Richard~E. Borcherds.
+\newblock Monstrous moonshine and monstrous {{Lie}} superalgebras.
+\newblock {\em Inventiones Mathematicae}, 109(1):405--444, December 1992.
+
+\bibitem[CIZ87a]{cappelliADEClassificationMinimal1987}
+A.~Cappelli, C.~Itzykson, and J.~B. Zuber.
+\newblock The {{A-D-E}} classification of minimal {{andA1}}(1)conformal invariant theories.
+\newblock {\em Communications in Mathematical Physics}, 113(1):1--26, March 1987.
+
+\bibitem[CIZ87b]{cappelliModularInvariantPartition1987}
+A.~Cappelli, C.~Itzykson, and J.~B. Zuber.
+\newblock Modular invariant partition functions in two dimensions.
+\newblock {\em Nuclear Physics B}, 280:445--465, January 1987.
+
+\bibitem[Gab00]{gaberdielIntroductionConformalField2000}
+Matthias~R Gaberdiel.
+\newblock An introduction to conformal field theory.
+\newblock {\em Reports on Progress in Physics}, 63(4):607--667, April 2000.
+
+\bibitem[Gan]{gannonClassificationSUModular}
+Terry Gannon.
+\newblock The classification of {{SU}}(3) modular invariants revisited.
+
+\bibitem[Gan97]{gannonModularInvariantsMinimal1997}
+Terry Gannon.
+\newblock {\emph{U}}(1)m modular invariants, {{{\emph{N}}}} = 2 minimal models, and the quantum {{Hall}} effect.
+\newblock {\em Nuclear Physics B}, 491(3):659--688, May 1997.
+
+\bibitem[Gan00]{gannonCappelliItzyksonZuberADEClassification2000}
+T.~Gannon.
+\newblock The {{Cappelli-Itzykson-Zuber A-D-E}} classification.
+\newblock {\em Reviews in Mathematical Physics}, 12(05):739--748, May 2000.
+
+\end{thebibliography}
