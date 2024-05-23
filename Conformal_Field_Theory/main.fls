@@ -1,4 +1,4 @@
-PWD /home/zhangxh/SynologyDrive/Gitea/Notes/Conformal_Field_Theory
+PWD /home/zhangxh/SynologyDrive/Github/Notes/Conformal_Field_Theory
 INPUT /opt/texlive/2024/texmf.cnf
 INPUT /opt/texlive/2024/texmf-dist/web2c/texmf.cnf
 INPUT /opt/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
@@ -365,10 +365,12 @@ INPUT /opt/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmtt9.tfm
 OUTPUT main.pdf
 INPUT /opt/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /opt/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+INPUT /opt/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT ./main.bbl
 INPUT ./main.bbl
 INPUT main.bbl
 INPUT main.aux
+INPUT /opt/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /opt/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /opt/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /opt/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
